@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuTranscriptMapper">
+    
+    <resultMap type="StuTranscript" id="StuTranscriptResult">
+        <result property="id"    column="id"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="score"    column="score"    />
+        <result property="isPass"    column="is_pass"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="studentName"    column="student_name"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDel"    column="is_del"    />
+    </resultMap>
+
+    <sql id="selectStuTranscriptVo">
+        select id, course_id, student_id, score, is_pass, course_name, student_name, status, create_time, update_time, is_del from stu_transcript
+    </sql>
+
+    <select id="selectStuTranscriptList" parameterType="StuTranscript" resultMap="StuTranscriptResult">
+        <include refid="selectStuTranscriptVo"/>
+        <where>  
+            <if test="courseId != null "> and course_id = #{courseId}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="isPass != null "> and is_pass = #{isPass}</if>
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="studentName != null  and studentName != ''"> and student_name like concat('%', #{studentName}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isDel != null "> and is_del = #{isDel}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuTranscriptById" parameterType="Long" resultMap="StuTranscriptResult">
+        <include refid="selectStuTranscriptVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStuTranscript" parameterType="StuTranscript" useGeneratedKeys="true" keyProperty="id">
+        insert into stu_transcript
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">course_id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="score != null">score,</if>
+            <if test="isPass != null">is_pass,</if>
+            <if test="courseName != null">course_name,</if>
+            <if test="studentName != null">student_name,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDel != null">is_del,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">#{courseId},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="score != null">#{score},</if>
+            <if test="isPass != null">#{isPass},</if>
+            <if test="courseName != null">#{courseName},</if>
+            <if test="studentName != null">#{studentName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDel != null">#{isDel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuTranscript" parameterType="StuTranscript">
+        update stu_transcript
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="isPass != null">is_pass = #{isPass},</if>
+            <if test="courseName != null">course_name = #{courseName},</if>
+            <if test="studentName != null">student_name = #{studentName},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStuTranscriptById" parameterType="Long">
+        delete from stu_transcript where id = #{id}
+    </delete>
+
+    <delete id="deleteStuTranscriptByIds" parameterType="String">
+        delete from stu_transcript where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
