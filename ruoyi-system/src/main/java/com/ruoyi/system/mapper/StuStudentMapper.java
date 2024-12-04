@@ -6,8 +6,8 @@ import com.ruoyi.system.domain.StuStudent;
 /**
  * 学生Mapper接口
  * 
- * @author SZF
- * @date 2024-12-04
+ * @author ruoyi
+ * @date 2024-12-05
  */
 public interface StuStudentMapper 
 {

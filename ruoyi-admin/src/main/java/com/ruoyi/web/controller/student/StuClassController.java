@@ -1,4 +1,4 @@
-package com.ruoyi.system.controller;
+package com.ruoyi.web.controller.student;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 班级Controller
  * 
  * @author SZF
- * @date 2024-12-04
+ * @date 2024-12-05
  */
 @RestController
 @RequestMapping("/system/class")

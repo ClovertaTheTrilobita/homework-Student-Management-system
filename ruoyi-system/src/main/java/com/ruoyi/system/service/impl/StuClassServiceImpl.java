@@ -12,7 +12,7 @@ import com.ruoyi.system.service.IStuClassService;
  * 班级Service业务层处理
  * 
  * @author SZF
- * @date 2024-12-04
+ * @date 2024-12-05
  */
 @Service
 public class StuClassServiceImpl implements IStuClassService 

@@ -2,6 +2,11 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.StuCourse;
+import com.ruoyi.system.domain.StuStudent;
+import com.ruoyi.system.mapper.StuCourseMapper;
+import com.ruoyi.system.mapper.StuStudentMapper;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.StuTranscriptMapper;
@@ -19,6 +24,10 @@ public class StuTranscriptServiceImpl implements IStuTranscriptService
 {
     @Autowired
     private StuTranscriptMapper stuTranscriptMapper;
+    @Autowired
+    private StuStudentMapper stuStudentMapper;
+    @Autowired
+    private StuCourseMapper stuCourseMapper;
 
     /**
      * 查询成绩
@@ -54,6 +63,18 @@ public class StuTranscriptServiceImpl implements IStuTranscriptService
     public int insertStuTranscript(StuTranscript stuTranscript)
     {
         stuTranscript.setCreateTime(DateUtils.getNowDate());
+        if(!ObjectUtils.isEmpty(stuTranscript.getStudentId())){
+            StuStudent student = stuStudentMapper.selectStuStudentById(stuTranscript.getStudentId());
+            if(!ObjectUtils.isEmpty(student)){
+                stuTranscript.setStudentName(student.getName());
+            }
+        }
+        if(!ObjectUtils.isEmpty(stuTranscript.getCourseId())){
+            StuCourse course = stuCourseMapper.selectStuCourseById(stuTranscript.getCourseId());
+            if(!ObjectUtils.isEmpty(course)){
+                stuTranscript.setCourseName(course.getName());
+            }
+        }
         return stuTranscriptMapper.insertStuTranscript(stuTranscript);
     }
 
@@ -67,6 +88,20 @@ public class StuTranscriptServiceImpl implements IStuTranscriptService
     public int updateStuTranscript(StuTranscript stuTranscript)
     {
         stuTranscript.setUpdateTime(DateUtils.getNowDate());
+        if(!ObjectUtils.isEmpty(stuTranscript.getStudentId())){
+            StuStudent student =
+                    stuStudentMapper.selectStuStudentById(stuTranscript.getStudentId());
+            if(!ObjectUtils.isEmpty(student)){
+                stuTranscript.setStudentName(student.getName());
+            }
+        }
+        if(!ObjectUtils.isEmpty(stuTranscript.getCourseId())){
+            StuCourse course =
+                    stuCourseMapper.selectStuCourseById(stuTranscript.getCourseId());
+            if(!ObjectUtils.isEmpty(course)){
+                stuTranscript.setCourseName(course.getName());
+            }
+        }
         return stuTranscriptMapper.updateStuTranscript(stuTranscript);
     }
 

@@ -7,7 +7,7 @@ import com.ruoyi.system.domain.StuClass;
  * 班级Service接口
  * 
  * @author SZF
- * @date 2024-12-04
+ * @date 2024-12-05
  */
 public interface IStuClassService 
 {

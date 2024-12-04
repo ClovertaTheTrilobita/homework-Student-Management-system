@@ -8,12 +8,14 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 学生对象 stu_student
  * 
- * @author SZF
- * @date 2024-12-04
+ * @author ruoyi
+ * @date 2024-12-05
  */
 public class StuStudent extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
+
+    private String className;
 
     /** ID */
     private Long id;
@@ -33,6 +35,10 @@ public class StuStudent extends BaseEntity
     /** 逻辑删除 */
     @Excel(name = "逻辑删除")
     private Long isDel;
+
+    /** 班级id */
+    @Excel(name = "班级id")
+    private Long classId;
 
     public void setId(Long id) 
     {
@@ -79,6 +85,23 @@ public class StuStudent extends BaseEntity
     {
         return isDel;
     }
+    public void setClassId(Long classId) 
+    {
+        this.classId = classId;
+    }
+
+    public Long getClassId() 
+    {
+        return classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     @Override
     public String toString() {
@@ -90,6 +113,7 @@ public class StuStudent extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .append("isDel", getIsDel())
+            .append("classId", getClassId())
             .toString();
     }
 }

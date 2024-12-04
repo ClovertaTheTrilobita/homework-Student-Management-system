@@ -2,23 +2,29 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.StuClass;
+import com.ruoyi.system.mapper.StuClassMapper;
+import io.netty.util.internal.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.StuStudentMapper;
 import com.ruoyi.system.domain.StuStudent;
 import com.ruoyi.system.service.IStuStudentService;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 学生Service业务层处理
  * 
- * @author SZF
- * @date 2024-12-04
+ * @author ruoyi
+ * @date 2024-12-05
  */
 @Service
 public class StuStudentServiceImpl implements IStuStudentService 
 {
     @Autowired
     private StuStudentMapper stuStudentMapper;
+    @Autowired
+    private StuClassMapper stuClassMapper;
 
     /**
      * 查询学生
@@ -41,7 +47,15 @@ public class StuStudentServiceImpl implements IStuStudentService
     @Override
     public List<StuStudent> selectStuStudentList(StuStudent stuStudent)
     {
-        return stuStudentMapper.selectStuStudentList(stuStudent);
+        List<StuStudent> stulist = stuStudentMapper.selectStuStudentList(stuStudent);
+        for (StuStudent student : stulist) {
+            if (!ObjectUtils.isEmpty(student.getClassId())) {
+                StuClass stuClass = stuClassMapper.selectStuClassById(student.getClassId());
+                student.setClassName(stuClass.getName());
+            }
+
+        }
+        return stulist;
     }
 
     /**

@@ -9,13 +9,13 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 班级对象 stu_class
  * 
  * @author SZF
- * @date 2024-12-04
+ * @date 2024-12-05
  */
 public class StuClass extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    /** 班级ID */
     private Long id;
 
     /** 班级名称 */
